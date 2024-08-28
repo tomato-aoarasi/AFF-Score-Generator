@@ -58,6 +58,8 @@ def find_combination(min_score, max_score, max_note, max_tap, max_hold, max_arc,
                 "total_score": total_score
             }
             
+    return None
+            
 class ScoreDetail:
     def __init__(self, detail):
         shiny_pure_count = detail['note_shiny_pure'] + detail['tap_shiny_pure'] + detail['hold_shiny_pure'] + detail['arc_shiny_pure']
@@ -89,5 +91,8 @@ def GenerateContent(aff_path: str, min_score: int = 9800000, max_score: int = 98
     
     result = find_combination(min_score, max_score, max_note, max_tap, max_hold, max_arc, 
                               single_shiny_pure_score, single_pure_score, single_far_score, single_lost_score, attempts)
+    
+    if not result:
+        raise RuntimeError("no solution")
     
     return ScoreDetail(result)
